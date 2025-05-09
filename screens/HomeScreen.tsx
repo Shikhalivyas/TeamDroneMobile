@@ -76,7 +76,7 @@ export default function HomeScreen() {
         {/* Hero Section */}
         <View style={styles.heroContainer}>
           <Image 
-            source={require('../src/assets/images/3d-render.jpeg')} 
+            source={require('../src/assets/images/banner.jpg')} 
             style={styles.heroBackground}
             resizeMode="cover"
           />
@@ -91,7 +91,7 @@ export default function HomeScreen() {
           ]}>
             <View style={[
               styles.heroTextContainer,
-              isLargeScreen ? { width: '50%' } : { width: '100%' }
+              isLargeScreen ? { width: '50%', paddingRight: 20 } : { width: '100%' }
             ]}>
               <Text style={styles.heroTitle}>The leading platform for 3D & AR on the web</Text>
               <Text style={styles.heroSubtitle}>
@@ -124,6 +124,7 @@ export default function HomeScreen() {
           angle={45}
           style={styles.techSection}
         >
+          <Text style={[styles.sectionTitle, { color: 'white' }]}>Our Technologies</Text>
           <View style={styles.techGrid}>
             {technologies.map((tech, index) => (
               <View key={index} style={styles.card}>
@@ -164,8 +165,8 @@ export default function HomeScreen() {
   );
 }
 
-const cardWidth = (width - 40) / 2;
-const industryItemWidth = (width - 50) / 3;
+const cardWidth = (width - 60) / 2; // Adjusted for better spacing
+const industryItemWidth = (width - 60) / 3; // Adjusted for better spacing
 
 const styles = StyleSheet.create({
   container: {
@@ -176,38 +177,48 @@ const styles = StyleSheet.create({
     paddingBottom: 40
   },
   heroContainer: {
-    minHeight: height * 0.8,
+    height: height * 0.8, // Fixed height for better control
     position: 'relative'
   },
   heroBackground: {
     ...StyleSheet.absoluteFillObject,
-    resizeMode: 'cover'
+    width: '100%',
+    height: '100%'
   },
   heroOverlay: {
     ...StyleSheet.absoluteFillObject
   },
   heroContent: {
-    position: 'relative',
-    zIndex: 10,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
     padding: 20,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    zIndex: 10
   },
   heroTextContainer: {
-    paddingRight: 20
+    paddingBottom: 20
   },
   heroTitle: {
     fontSize: width > 400 ? 32 : 24,
     fontWeight: '800',
-    color: 'bisque',
+    color: 'white',
     marginBottom: 16,
-    lineHeight: width > 400 ? 38 : 30
+    lineHeight: width > 400 ? 38 : 30,
+    textShadowColor: 'rgba(0,0,0,0.5)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3
   },
   heroSubtitle: {
     fontSize: width > 400 ? 18 : 14,
-    color: 'bisque',
+    color: 'white',
     marginBottom: 24,
-    lineHeight: 24
+    lineHeight: 24,
+    textShadowColor: 'rgba(0,0,0,0.5)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -247,7 +258,14 @@ const styles = StyleSheet.create({
   },
   techSection: {
     paddingVertical: 40,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    backgroundColor: '#f8f9fa'
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 30,
+    textAlign: 'center'
   },
   techGrid: {
     flexDirection: 'row',
@@ -289,13 +307,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#1b2430',
     paddingVertical: 40,
     paddingHorizontal: 20
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
-    marginBottom: 30
   },
   industriesGrid: {
     flexDirection: 'row',
