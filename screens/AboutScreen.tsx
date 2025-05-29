@@ -11,7 +11,7 @@ export default function AboutScreen() {
         <View style={styles.textCenter}>
           <Text style={styles.title}>About Us</Text>
           <Text style={styles.subtitle}>
-            [College Name] has been a beacon of excellence in education since [Year]. We nurture young minds to excel in every field.
+            The Digital Twin Enhancement Project at Latrobe University is a cutting-edge initiative aimed at revolutionizing how campus infrastructure and operations are visualized, monitored, and managed. Since 2024, Latrobe University has been a beacon of excellence in education — and now, through this innovative project, we continue to lead by integrating technology with real-world applications to create smarter, more sustainable campuses.
           </Text>
         </View>
 
@@ -19,14 +19,14 @@ export default function AboutScreen() {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Our Mission</Text>
             <Text style={styles.sectionText}>
-              To impart world-class education and promote research and innovation for global excellence.
+              To develop an intelligent, real-time digital representation of our campus that supports data-driven decision-making, enhances operational efficiency, and fosters innovation in infrastructure management and academic research.
             </Text>
           </View>
 
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Our Vision</Text>
             <Text style={styles.sectionText}>
-              To become a globally recognized institution known for transforming society through knowledge.
+              To establish [College Name] as a leader in Digital Twin innovation, creating a transformative platform that bridges the physical and digital worlds — empowering smart campus operations, sustainability, and experiential learning.
             </Text>
           </View>
         </View>

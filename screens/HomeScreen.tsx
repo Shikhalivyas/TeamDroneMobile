@@ -6,12 +6,12 @@ import {
   TouchableOpacity, 
   Image, 
   StyleSheet, 
-  Dimensions,
-  Platform 
+  Dimensions 
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const { width, height } = Dimensions.get('window');
 
@@ -64,16 +64,16 @@ const industries = [
 ];
 
 export default function HomeScreen() {
-  const isLargeScreen = width > 768; // Tablet and larger
+  const isLargeScreen = width > 768;
+  const HEADER_HEIGHT = 0;
 
   return (
     <View style={styles.container}>
       <Header />
       <ScrollView 
-        contentContainerStyle={styles.scrollContainer}
+        contentContainerStyle={[styles.scrollContainer, { paddingTop: HEADER_HEIGHT }]} 
         showsVerticalScrollIndicator={false}
       >
-        {/* Hero Section */}
         <View style={styles.heroContainer}>
           <Image 
             source={require('../src/assets/images/banner.jpg')} 
@@ -84,19 +84,11 @@ export default function HomeScreen() {
             colors={['rgba(0,0,0,0.8)', 'rgba(0,0,0,0.3)']} 
             style={styles.heroOverlay} 
           />
-          
-          <View style={[
-            styles.heroContent,
-            isLargeScreen ? { flexDirection: 'row' } : { flexDirection: 'column' }
-          ]}>
-            <View style={[
-              styles.heroTextContainer,
-              isLargeScreen ? { width: '50%', paddingRight: 20 } : { width: '100%' }
-            ]}>
-              <Text style={styles.heroTitle}>The leading platform for 3D & AR on the web</Text>
+          <View style={[styles.heroContent, isLargeScreen ? { flexDirection: 'row' } : { flexDirection: 'column' }]}>
+            <View style={[styles.heroContainer, isLargeScreen ? { width: '50%', paddingRight: 20, justifyContent: 'center' } : { width: '100%', marginBottom: 20 }]}>
+              <Text style={styles.heroTitle}>Seamless Integration of 3D Data & Real-World Operations</Text>
               <Text style={styles.heroSubtitle}>
-                Manage your 3D assets. Distribute 3D & AR experiences. 
-                Collaborate with others. Showcase your work.
+                Build intelligent 3D environments. Connect physical systems with digital insights. Collaborate seamlessly. Drive smarter decision-making.
               </Text>
               <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.primaryButton}>
@@ -107,66 +99,44 @@ export default function HomeScreen() {
                 </TouchableOpacity>
               </View>
             </View>
-            
-            {/* Model Viewer - Right side on large screens, below on mobile */}
-            <View style={[
-              styles.modelContainer,
-              isLargeScreen ? { width: '50%' } : { width: '100%', marginTop: 20 }
-            ]}>
-              {/* <ModelViewer /> */}
-            </View>
+            <View style={[styles.modelContainer, isLargeScreen ? { width: '50%' } : { width: '100%' }]} />
           </View>
         </View>
 
-        {/* Technologies Section */}
-        <LinearGradient 
-          colors={['#000000', 'transparent']} 
-          angle={45}
-          style={styles.techSection}
-        >
+        <LinearGradient colors={['#000000', 'transparent']} angle={45} style={styles.techSection}>
           <Text style={[styles.sectionTitle, { color: 'white' }]}>Our Technologies</Text>
           <View style={styles.techGrid}>
             {technologies.map((tech, index) => (
               <View key={index} style={styles.card}>
-                <Image 
-                  source={tech.image} 
-                  style={styles.cardImage}
-                  resizeMode="cover"
-                />
+                <Image source={tech.image} style={styles.cardImage} resizeMode="cover" />
                 <View style={styles.cardContent}>
                   <Text style={styles.cardTitle}>{tech.title}</Text>
-                  <Text style={styles.cardDescription} numberOfLines={2}>
-                    {tech.description}
-                  </Text>
+                  <Text style={styles.cardDescription} numberOfLines={2}>{tech.description}</Text>
                 </View>
               </View>
             ))}
           </View>
         </LinearGradient>
 
-        {/* Industries Section */}
         <View style={styles.industriesSection}>
           <Text style={styles.sectionTitle}>Our Industries</Text>
           <View style={styles.industriesGrid}>
             {industries.map((industry, index) => (
               <TouchableOpacity key={index} style={styles.industryItem}>
-                <Icon 
-                  name={industry.icon} 
-                  size={width > 400 ? 24 : 20} 
-                  color="#7ab8ff" 
-                />
+                <Icon name={industry.icon} size={width > 400 ? 24 : 20} color="#7ab8ff" />
                 <Text style={styles.industryName}>{industry.name}</Text>
               </TouchableOpacity>
             ))}
           </View>
         </View>
       </ScrollView>
+      <Footer />
     </View>
   );
 }
 
-const cardWidth = (width - 60) / 2; // Adjusted for better spacing
-const industryItemWidth = (width - 60) / 3; // Adjusted for better spacing
+const cardWidth = (width - 60) / 2;
+const industryItemWidth = (width - 60) / 3;
 
 const styles = StyleSheet.create({
   container: {
@@ -177,29 +147,26 @@ const styles = StyleSheet.create({
     paddingBottom: 40
   },
   heroContainer: {
-    height: height * 0.8, // Fixed height for better control
-    position: 'relative'
+    height: height * 0.8,
+    position: 'relative',
+    overflow: 'hidden',
+    justifyContent: 'center'
   },
   heroBackground: {
-    ...StyleSheet.absoluteFillObject,
-    width: '100%',
-    height: '100%'
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
   },
   heroOverlay: {
     ...StyleSheet.absoluteFillObject
   },
   heroContent: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 20,
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 10
-  },
-  heroTextContainer: {
-    paddingBottom: 20
+    alignItems: 'flex-start',
+    padding: 20
   },
   heroTitle: {
     fontSize: width > 400 ? 32 : 24,
@@ -207,21 +174,22 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 16,
     lineHeight: width > 400 ? 38 : 30,
-    textShadowColor: 'rgba(0,0,0,0.5)',
+    textShadowColor: 'rgba(0,0,0,0.7)',
     textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 3
+    textShadowRadius: 4
   },
   heroSubtitle: {
     fontSize: width > 400 ? 18 : 14,
     color: 'white',
     marginBottom: 24,
     lineHeight: 24,
-    textShadowColor: 'rgba(0,0,0,0.5)',
+    textShadowColor: 'rgba(0,0,0,0.7)',
     textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2
+    textShadowRadius: 3
   },
   buttonContainer: {
     flexDirection: 'row',
+    justifyContent: 'flex-start',
     gap: 16,
     flexWrap: 'wrap'
   },
@@ -230,7 +198,8 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 6,
-    minWidth: 160
+    minWidth: 160,
+    marginRight: 16
   },
   primaryButtonText: {
     color: 'black',
@@ -287,8 +256,7 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: '100%',
-    height: cardWidth * 0.7,
-    resizeMode: 'cover'
+    height: cardWidth * 0.7
   },
   cardContent: {
     padding: 16
@@ -319,14 +287,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
     padding: 12,
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    borderRadius: 8
+    backgroundColor: 'rgba(255,255,255,0.07)',
+    borderRadius: 10
   },
   industryName: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 12,
-    marginTop: 8,
-    fontWeight: '500'
+    color: '#7ab8ff',
+    marginTop: 10,
+    fontWeight: '600',
+    textAlign: 'center'
   }
 });

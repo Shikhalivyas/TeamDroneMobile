@@ -1,33 +1,77 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, Dimensions, TouchableOpacity, Linking } from 'react-native';
-import Header from '../components/Header';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 const { width } = Dimensions.get('window');
 
-// Sample team data
 const teamMembers = [
   {
-    name: 'Member 1',
-    role: 'Lead Developer',
-    description: 'Passionate about building scalable apps.',
-    // imageUrl: require('../src/assets/images/team/john.jpg'),
-    imageUrl: '',
+    id: 1,
+    name: 'Shikhali Vyas',
+    role: 'Master of Cyber Security',
+    description: 'Expert in Agile methodologies and team coordination, ensuring smooth sprint execution and timely delivery of project milestones.',
+    imageUrl: require('../src/assets/images/team/shikhali.png'),
     socialLinks: {
-      linkedin: 'https://www.linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
-    },
+      linkedin: '#',
+      twitter: '#'
+    }
   },
   {
-    name: 'Member 2',
-    role: 'UX/UI Designer',
-    description: 'Focused on crafting user-friendly experiences.',
-    imageUrl: '',
+    id: 2,
+    name: 'Jaydeep Bhalodiya',
+    role: 'Master of Cyber Security',
+    description: 'Specialist in securing digital infrastructures with a focus on penetration testing, network defense, and data protection strategies.',
+    imageUrl: require('../src/assets/images/team/jaydeepimgpng.png'),
     socialLinks: {
-      linkedin: 'https://www.linkedin.com/in/janesmith',
-      twitter: 'https://twitter.com/janesmith',
-    },
+      linkedin: '#',
+      twitter: '#'
+    }
   },
-  // Add more members as needed
+  {
+    id: 3,
+    name: 'Manpreet Kaur',
+    role: 'Master of Cyber Security',
+    description: 'Proficient in software development and IT systems integration, ensuring scalable and reliable tech solutions across platforms.',
+    imageUrl: require('../src/assets/images/team/manpreetimg.png'),
+    socialLinks: {
+      linkedin: '#',
+      twitter: '#'
+    }
+  },
+  {
+    id: 4,
+    name: 'Seshivardhan Goud',
+    role: 'Master of Cyber Security',
+    description: 'Focused on ethical hacking, risk assessment, and creating robust defense mechanisms against modern cybersecurity threats.',
+    imageUrl: require('../src/assets/images/team/seshiverdhanimg.png'),
+    socialLinks: {
+      linkedin: '#',
+      twitter: '#'
+    }
+  },
+  {
+    id: 5,
+    name: 'Anmol Aslaliya',
+    role: 'Master of Cyber Security',
+    description: 'Dedicated to developing secure systems and analyzing vulnerabilities to fortify applications and infrastructure against breaches.',
+    imageUrl: require('../src/assets/images/team/Anmolimg.png'),
+    socialLinks: {
+      linkedin: '#',
+      twitter: '#'
+    }
+  },
+  {
+    id: 6,
+    name: 'Balasowjanya Bhogadhi',
+    role: 'Master of Cyber Security',
+    description: 'Cybersecurity analyst with a strong grasp on cryptographic systems, malware analysis, and compliance management.',
+    imageUrl: require('../src/assets/images/team/balasoniyaimg.png'),
+    socialLinks: {
+      linkedin: '#',
+      twitter: '#'
+    }
+  }
 ];
 
 export default function OurTeamScreen() {
@@ -40,39 +84,34 @@ export default function OurTeamScreen() {
         </Text>
 
         <View style={styles.grid}>
-          {teamMembers.map((member, index) => (
-            <View key={index} style={styles.card}>
-              <Image
-                source={member.imageUrl}
-                style={styles.image}
-                resizeMode="cover"
-              />
+          {teamMembers.map((member) => (
+            <View key={member.id} style={styles.card}>
+              <View style={styles.imageContainer}>
+                <Image
+                  source={member.imageUrl}
+                  style={styles.image}
+                  resizeMode="cover"
+                />
+              </View>
               <View style={styles.cardContent}>
                 <Text style={styles.name}>{member.name}</Text>
                 <Text style={styles.role}>{member.role}</Text>
                 <Text style={styles.description}>{member.description}</Text>
-                {member.socialLinks && (
-                  <View style={styles.socialLinks}>
-                    {member.socialLinks.linkedin && (
-                      <TouchableOpacity
-                        onPress={() => {
-                          Linking.openURL(member.socialLinks.linkedin);
-                        }}
-                      >
-                        <Text style={styles.link}>LinkedIn</Text>
-                      </TouchableOpacity>
-                    )}
-                    {member.socialLinks.twitter && (
-                      <TouchableOpacity
-                        onPress={() => {
-                          Linking.openURL(member.socialLinks.twitter);
-                        }}
-                      >
-                        <Text style={styles.link}>Twitter</Text>
-                      </TouchableOpacity>
-                    )}
-                  </View>
-                )}
+                
+                <View style={styles.socialLinks}>
+                  <TouchableOpacity
+                    onPress={() => Linking.openURL(member.socialLinks.linkedin)}
+                    style={styles.socialIcon}
+                  >
+                    <Icon name="linkedin" size={24} color="#0077b5" />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => Linking.openURL(member.socialLinks.twitter)}
+                    style={styles.socialIcon}
+                  >
+                    <Icon name="twitter" size={24} color="#1DA1F2" />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           ))}
@@ -85,20 +124,23 @@ export default function OurTeamScreen() {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
+    paddingVertical: 30,
+    paddingHorizontal: 16,
+    backgroundColor: '#f8f9fa',
   },
   title: {
-    fontSize: width > 400 ? 32 : 26,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: 12,
+    color: '#1b2430',
   },
   subtitle: {
-    color: '#4a4a4a',
+    color: '#6c757d',
     fontSize: 16,
     textAlign: 'center',
-    marginBottom: 24,
+    marginBottom: 32,
+    paddingHorizontal: 20,
   },
   grid: {
     flexDirection: 'row',
@@ -106,46 +148,53 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   card: {
-    width: (width - 40) / 2,
+    width: width > 768 ? (width - 48) / 3 : (width - 32) / 2,
     backgroundColor: 'white',
-    borderRadius: 10,
+    borderRadius: 12,
     overflow: 'hidden',
-    marginBottom: 20,
+    marginBottom: 24,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
   },
-  image: {
+  imageContainer: {
     height: 200,
     width: '100%',
+    overflow: 'hidden',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
   cardContent: {
-    padding: 15,
+    padding: 16,
   },
   name: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 6,
+    color: '#1b2430',
   },
   role: {
-    color: '#007bff',
+    color: '#3a4a6b',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '600',
     marginBottom: 10,
   },
   description: {
     color: '#666',
     fontSize: 14,
-    marginBottom: 12,
+    marginBottom: 16,
+    lineHeight: 20,
   },
   socialLinks: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    gap: 16,
   },
-  link: {
-    color: '#007bff',
-    fontSize: 14,
+  socialIcon: {
+    padding: 4,
   },
 });
