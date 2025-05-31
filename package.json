@@ -17,8 +17,9 @@
     "@types/three": "^0.176.0",
     "d3-shape": "^3.2.0",
     "expo-asset": "~11.1.5",
+    "expo-file-system": "~18.1.10",
     "expo-gl": "~15.1.5",
-    "expo-three": "^2.2.1",
+    "expo-three": "^4.0.2",
     "papaparse": "^5.5.3",
     "react": "19.0.0",
     "react-native": "0.79.2",
@@ -34,8 +35,7 @@
     "react-native-webview": "^13.13.5",
     "react-spinners": "^0.17.0",
     "three": "^0.176.0",
-    "three-stdlib": "^2.36.0",
-    "expo-file-system": "~18.1.10"
+    "three-stdlib": "^2.36.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

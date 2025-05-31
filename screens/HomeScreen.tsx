@@ -12,6 +12,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import LineChartExample from './LineChartExample';
+import EnergyCharts from './EnergyCharts';
 
 const { width, height } = Dimensions.get('window');
 
@@ -70,11 +72,11 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Header />
-      <ScrollView 
-        contentContainerStyle={[styles.scrollContainer, { paddingTop: HEADER_HEIGHT }]} 
-        showsVerticalScrollIndicator={false}
+      <ScrollView
+        contentContainerStyle={[styles.scrollContainer, { paddingTop: HEADER_HEIGHT }]}
+        showsVerticalScrollIndicator={true}
       >
-        <View style={styles.heroContainer}>
+        <View style={styles.heroWrapper}>
           <Image 
             source={require('../src/assets/images/banner.jpg')} 
             style={styles.heroBackground}
@@ -103,20 +105,11 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        <LinearGradient colors={['#000000', 'transparent']} angle={45} style={styles.techSection}>
-          <Text style={[styles.sectionTitle, { color: 'white' }]}>Our Technologies</Text>
-          <View style={styles.techGrid}>
-            {technologies.map((tech, index) => (
-              <View key={index} style={styles.card}>
-                <Image source={tech.image} style={styles.cardImage} resizeMode="cover" />
-                <View style={styles.cardContent}>
-                  <Text style={styles.cardTitle}>{tech.title}</Text>
-                  <Text style={styles.cardDescription} numberOfLines={2}>{tech.description}</Text>
-                </View>
-              </View>
-            ))}
-          </View>
-        </LinearGradient>
+        <View style={styles.graphContainer}>
+          <EnergyCharts />
+        </View>
+
+     
 
         <View style={styles.industriesSection}>
           <Text style={styles.sectionTitle}>Our Industries</Text>
@@ -146,11 +139,11 @@ const styles = StyleSheet.create({
   scrollContainer: {
     paddingBottom: 40
   },
-  heroContainer: {
-    height: height * 0.8,
+  heroWrapper: {
     position: 'relative',
     overflow: 'hidden',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingBottom: 20
   },
   heroBackground: {
     position: 'absolute',
@@ -166,64 +159,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-start',
-    padding: 20
+    padding: 20,
+    zIndex: 10
   },
-  heroTitle: {
-    fontSize: width > 400 ? 32 : 24,
-    fontWeight: '800',
-    color: 'white',
-    marginBottom: 16,
-    lineHeight: width > 400 ? 38 : 30,
-    textShadowColor: 'rgba(0,0,0,0.7)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 4
-  },
-  heroSubtitle: {
-    fontSize: width > 400 ? 18 : 14,
-    color: 'white',
-    marginBottom: 24,
-    lineHeight: 24,
-    textShadowColor: 'rgba(0,0,0,0.7)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 3
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    gap: 16,
-    flexWrap: 'wrap'
-  },
-  primaryButton: {
-    backgroundColor: 'white',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 6,
-    minWidth: 160,
-    marginRight: 16
-  },
-  primaryButtonText: {
-    color: 'black',
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-  secondaryButton: {
-    borderWidth: 2,
-    borderColor: 'white',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 6,
-    minWidth: 160
-  },
-  secondaryButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
+  heroContainer: {},
   modelContainer: {
     height: width > 768 ? 400 : 300,
     backgroundColor: 'rgba(255,255,255,0.1)',
     borderRadius: 10,
     overflow: 'hidden'
+  },
+  graphContainer: {
+    paddingHorizontal: 20,
+    marginTop: 20
   },
   techSection: {
     paddingVertical: 40,
@@ -295,5 +243,49 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontWeight: '600',
     textAlign: 'center'
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    gap: 16,
+    flexWrap: 'wrap'
+  },
+  primaryButton: {
+    backgroundColor: 'white',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 6,
+    minWidth: 160,
+    marginRight: 16
+  },
+  primaryButtonText: {
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  secondaryButton: {
+    borderColor: 'white',
+    borderWidth: 1,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 6,
+    minWidth: 160
+  },
+  secondaryButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  heroTitle: {
+    color: 'white',
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 16
+  },
+  heroSubtitle: {
+    color: 'white',
+    fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 24
   }
 });
